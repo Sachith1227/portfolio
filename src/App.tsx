@@ -1,0 +1,103 @@
+﻿import { useEffect, useRef, useState } from 'react'
+import type { FormEvent, ReactNode } from 'react'
+import { githubUrl, milestones, projects, stack } from './data'
+import './App.css'
+
+const nav = [{ id: 'home', label: 'Home' }, { id: 'about', label: 'About' }, { id: 'projects', label: 'Projects' }, { id: 'stack', label: 'Stack' }, { id: 'connect', label: 'Connect' }]
+
+type IconName = 'arrow' | 'github' | 'code' | 'layers' | 'database' | 'phone' | 'sun' | 'pause' | 'play' | 'external' | 'chevron'
+function Icon({ name, size = 18 }: { name: IconName; size?: number }) {
+  const paths: Record<IconName, ReactNode> = {
+    arrow: <><path d="M5 12h14M13 6l6 6-6 6" /></>,
+    github: <path d="M9 19c-4.3 1.3-4.3-2.2-6-2.7m12 5v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.8A5.3 5.3 0 0 0 19 4.3 4.9 4.9 0 0 0 18.9.7S17.7.3 15 2.1a13.4 13.4 0 0 0-7 0C5.3.3 4.1.7 4.1.7A4.9 4.9 0 0 0 4 4.3a5.3 5.3 0 0 0-1.4 3.7c0 5.3 3.2 6.5 6.2 6.8A3.4 3.4 0 0 0 8 17.3v4" />,
+    code: <><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16" /></>,
+    layers: <><path d="m12 3 10 6-10 6L2 9l10-6ZM3 13l9 5 9-5M3 17l9 5 9-5" /></>,
+    database: <><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0" /></>,
+    phone: <><rect x="6" y="2" width="12" height="20" rx="2" /><path d="M10 5h4M11 19h2" /></>,
+    sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" /></>,
+    pause: <><path d="M8 5v14M16 5v14" /></>,
+    play: <path d="m8 5 11 7-11 7V5Z" />,
+    external: <><path d="M14 3h7v7m0-7L10 14M10 3H4v17h17v-6" /></>,
+    chevron: <path d="m9 6 6 6-6 6" />,
+  }
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>
+}
+
+function Terminal() {
+  const [input, setInput] = useState('')
+  const [lines, setLines] = useState([{ command: 'whoami', text: 'Chamalka — building for the web, mobile & a little fun.' }])
+  const output = useRef<HTMLDivElement>(null)
+  useEffect(() => { if (output.current) output.current.scrollTop = output.current.scrollHeight }, [lines])
+  const execute = (event: FormEvent) => {
+    event.preventDefault()
+    const command = input.trim().toLowerCase()
+    if (!command) return
+    setInput('')
+    if (command === 'clear') { setLines([]); return }
+    const responses: Record<string, string> = {
+      help: 'Try: whoami · projects · stack · about · github · clear',
+      whoami: 'Chamalka Senavirathna. Developer, curious learner, hands-on builder.',
+      projects: 'Opening projects → RoadRescue · SpendSmart · Beach Volleyball Mini',
+      stack: 'Opening stack → React · TypeScript · Flutter · Python & more',
+      about: 'Opening the story behind the code…',
+      github: 'github.com/Sachith1227 — use the GitHub links to explore my code.',
+    }
+    setLines(previous => [...previous.slice(-8), { command, text: responses[command] ?? `Command not found: ${command}. Type help to see available commands.` }])
+    if (['projects', 'stack', 'about'].includes(command)) window.location.hash = command
+  }
+  return <div className="terminal">
+    <div className="window-bar"><span className="window-dots" aria-hidden="true"><i /><i /><i /></span><span>chamalka@portfolio: ~</span><Icon name="code" size={13} /></div>
+    <div className="terminal-output" ref={output} role="log" aria-label="Terminal output" aria-live="polite">{lines.map((line, index) => <div key={index}><div className="terminal-command"><span>❯</span> {line.command}</div><p>{line.text}</p></div>)}</div>
+    <form className="terminal-input" onSubmit={execute}><label htmlFor="terminal-command">❯<span className="sr-only">Portfolio terminal command</span></label><input id="terminal-command" autoComplete="off" spellCheck={false} value={input} onChange={event => setInput(event.target.value)} placeholder="Type help and press enter" maxLength={100} /><kbd>↵</kbd></form>
+  </div>
+}
+
+function Background() {
+  return <div className="background" aria-hidden="true"><div className="background-grid" /><div className="background-glow" /><svg className="light-trails" viewBox="0 0 1600 1100" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="trail"><stop stopColor="#a6f25c" stopOpacity="0" /><stop offset=".5" stopColor="#a6f25c" stopOpacity=".65" /><stop offset="1" stopColor="#a6f25c" stopOpacity="0" /></linearGradient><linearGradient id="ribbon"><stop stopColor="#a6f25c" stopOpacity=".02" /><stop offset=".6" stopColor="#6ac529" stopOpacity=".13" /><stop offset="1" stopColor="#a6f25c" stopOpacity="0" /></linearGradient></defs><g className="trail-one"><path d="M-120 430Q100 90 860 -140L400 -170Q20 0-120 250Z" fill="url(#ribbon)" /><path d="M-120 430Q100 90 860 -140" fill="none" stroke="url(#trail)" /></g><g className="trail-two"><path d="M650 1150Q1430 850 1770 350L1800 550Q1350 1120 650 1150Z" fill="url(#ribbon)" /><path d="M650 1150Q1430 850 1770 350" fill="none" stroke="url(#trail)" /></g></svg><div className="background-code"><span>const curiosity = true;</span><span>git checkout -b next-chapter</span><span>return buildSomethingMeaningful();</span><span>import ideas from './everyday-life';</span></div></div>
+}
+
+function ProjectArt({ id }: { id: string }) {
+  if (id === 'roadrescue') return <div className="project-art road-art"><div className="browser-frame"><div className="browser-bar"><span className="window-dots" aria-hidden="true"><i /><i /><i /></span><span>roadrescue / live website</span><Icon name="external" size={11} /></div><img src="/projects/roadrescue.png" alt="Screenshot of the live RoadRescue homepage showing roadside assistance and request tracking" loading="lazy" /></div><span className="art-caption">REACT + TYPESCRIPT / FULL-STACK WEB</span></div>
+  if (id === 'spendsmart') return <div className="project-art spend-art"><span className="art-grid" /><div className="spend-orbit" /><div className="spend-orbit orbit-two" /><div className="spend-brand"><img src="/projects/spendsmart-logo.png" alt="SpendSmart app icon from the project repository" loading="lazy" /><span>SpendSmart<span>Every little bit adds up.</span></span></div><span className="float-tag tag-budget">↗ &nbsp; Budget with purpose</span><span className="float-tag tag-cloud"><span className="status-dot" /> Cloud-synced</span><span className="art-caption">FLUTTER + FIREBASE / MOBILE APP</span></div>
+  return <div className="project-art game-art"><img className="court" src="/projects/volleyball-court.jpg" alt="Beach court artwork from Beach Volleyball Mini" loading="lazy" /><span className="game-title">BEACH<br /><strong>VOLLEYBALL</strong><span>MINI</span></span><div className="net" /><img className="game-player" src="/projects/volleyball-player.png" alt="" loading="lazy" /><img className="game-ball" src="/projects/volleyball-ball.png" alt="" loading="lazy" /><span className="art-caption">PYTHON + PYGAME / GAME ARTWORK</span></div>
+}
+
+export default function App() {
+  const root = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState('home')
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [filter, setFilter] = useState('All builds')
+  const [paused, setPaused] = useState(() => {
+    try { return localStorage.getItem('portfolio-motion') === 'paused' } catch { return false }
+  })
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target) }
+    }), { threshold: .1 })
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id) }), { rootMargin: '-15% 0px -55% 0px' })
+    nav.forEach(({ id }) => { const element = document.getElementById(id); if (element) sectionObserver.observe(element) })
+    let frame = 0
+    const onScroll = () => { if (frame) return; frame = requestAnimationFrame(() => { const max = document.documentElement.scrollHeight - innerHeight; root.current?.style.setProperty('--progress', `${max > 0 ? scrollY / max : 0}`); frame = 0 }) }
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setMenuOpen(false) }
+    window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('keydown', onKey); onScroll()
+    return () => { observer.disconnect(); sectionObserver.disconnect(); window.removeEventListener('scroll', onScroll); window.removeEventListener('keydown', onKey); cancelAnimationFrame(frame) }
+  }, [])
+  const toggleMotion = () => setPaused(previous => { try { localStorage.setItem('portfolio-motion', previous ? 'playing' : 'paused') } catch { /* Motion still works without storage. */ } return !previous })
+  const visibleProjects = projects.filter(project => filter === 'All builds' || project.category === filter)
+  return <div className={`site-shell${paused ? ' motion-off' : ''}`} ref={root}>
+    <a className="skip-link" href="#main">Skip to content</a><div className="scroll-progress" aria-hidden="true" /><Background />
+    <header className="header"><div className="header-inner"><a className="brand" href="#home" aria-label="Chamalka home"><span className="brand-mark">c<span>s</span><b>.</b></span><span className="brand-caption">CHAMALKA<span>PORTFOLIO / 2026</span></span></a><nav className={menuOpen ? 'open' : ''} id="navigation" aria-label="Main navigation">{nav.map(item => <a key={item.id} href={`#${item.id}`} aria-current={active === item.id ? 'location' : undefined} onClick={() => setMenuOpen(false)}><span>/</span>{item.label}</a>)}</nav><div className="header-actions"><button className="motion-button" onClick={toggleMotion} aria-pressed={paused} aria-label={paused ? 'Enable animations' : 'Pause animations'} title={paused ? 'Enable animations' : 'Pause animations'}><Icon name={paused ? 'play' : 'pause'} size={14} /></button><a className="github-button" href={githubUrl} target="_blank" rel="noreferrer" aria-label="Chamalka on GitHub (opens in a new tab)"><Icon name="github" size={17} /></a><button className="menu-toggle" aria-expanded={menuOpen} aria-controls="navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close −' : 'Menu +'}</button></div></div></header>
+    <main id="main">
+      <section className="hero container" id="home" aria-labelledby="hero-title"><div className="hero-copy"><p className="eyebrow enter"><span className="status-dot" /> DEVELOPER BY CURIOSITY. BUILDER BY CHOICE.</p><p className="hero-hello enter">Hello, world <span className="hello-star">✳</span></p><h1 className="enter" id="hero-title">I’m Chamalka<span>Senavirathna<span className="name-dot">.</span></span></h1><div className="role-line enter"><Icon name="code" size={21} /><span>Full-stack <b>&</b> mobile developer</span></div><p className="hero-description enter">From useful web platforms to everyday mobile apps<br className="desktop-break" /> and playful experiments. I learn by making things real.</p><div className="hero-actions enter"><a className="button" href="#projects">Explore my work <Icon name="arrow" size={16} /></a><a className="button button-outline" href={githubUrl} target="_blank" rel="noreferrer"><Icon name="github" size={15} /> My GitHub</a></div><div className="enter hero-terminal"><Terminal /></div></div>
+        <div className="portrait-wrap enter"><div className="portrait-window"><div className="window-bar"><span className="window-dots" aria-hidden="true"><i /><i /><i /></span><span>~/chamalka/portrait.png</span><span className="file-indicator">PNG</span></div><div className="portrait-stage"><div className="portrait-grid" /><div className="portrait-ring" /><div className="portrait-ring ring-two" /><span className="portrait-watermark" aria-hidden="true">CS</span><span className="portrait-coord">01° / THE PERSON<br />BEHIND THE CODE</span><span className="portrait-plus" aria-hidden="true">+</span><img src="/chamalka-portrait.png" alt="Chamalka Senavirathna in a navy suit and white shirt" fetchPriority="high" /><div className="portrait-signature">Chamalka<span>Senavirathna</span></div></div><div className="portrait-status"><span><span className="status-dot" /> ALWAYS IN DEVELOPMENT</span><span>main <span className="branch-symbol">⑂</span></span></div></div><div className="floating-note"><span className="floating-icon"><Icon name="layers" size={22} /></span><span>One idea. Many possibilities.<small>WEB &nbsp; / &nbsp; MOBILE &nbsp; / &nbsp; GAMES</small></span><span className="note-arrow">↗</span></div><span className="portrait-side">IMAGINE IT. BUILD IT. MAKE IT BETTER.</span></div>
+        <div className="hero-baseline"><span>CRAFTING MY NEXT CHAPTER, ONE COMMIT AT A TIME.</span><a href="#about">SCROLL TO DISCOVER <span className="scroll-track"><i /></span></a></div>
+      </section>
+      <div className="facts-strip container reveal"><div><strong>03<span>↗</span></strong><span>FEATURED BUILDS<small>Web, mobile & games</small></span></div><div><strong>04<span>⌘</span></strong><span>CODE LANGUAGES<small>TypeScript · Dart · Python · Java</small></span></div><div><strong>2023<span>↗</span></strong><span>GITHUB SINCE<small>The first chapter of the journey</small></span></div></div>
+      <section className="section container about" id="about"><div className="about-top"><div className="reveal"><p className="eyebrow"><span>01</span> / THE PERSON BEHIND THE CODE</p><h2>A curious mind.<br />A <em>hands-on</em> approach.</h2><p className="section-copy lead">I’m Chamalka, a developer who enjoys connecting the dots between a good idea and a working product.</p><p className="section-copy">My projects span full-stack web development, Flutter apps, and Python games. I like building things that solve everyday problems — and leaving room to experiment along the way.</p><a href={githubUrl} target="_blank" rel="noreferrer" className="text-link">Find the story in my code <Icon name="arrow" size={15} /></a></div><div className="developer-file reveal"><div className="window-bar"><span><Icon name="code" size={13} /> developer.ts</span><span>ABOUT ME</span></div><div className="file-body"><p><span className="line-number">01</span><span className="syntax-comment">// A little context, in code.</span></p><p><span className="line-number">02</span><span><span className="syntax-purple">const</span> developer = {'{'}</span></p><p><span className="line-number">03</span><span>&nbsp; name: <span className="syntax-string">'Chamalka Senavirathna'</span>,</span></p><p><span className="line-number">04</span><span>&nbsp; github: <span className="syntax-string">'@Sachith1227'</span>,</span></p><p><span className="line-number">05</span><span>&nbsp; builds: [<span className="syntax-string">'web', 'mobile', 'games'</span>],</span></p><p><span className="line-number">06</span><span>&nbsp; approach: <span className="syntax-string">'learn by building'</span>,</span></p><p><span className="line-number">07</span><span>&nbsp; curiosity: <span className="syntax-purple">true</span></span></p><p><span className="line-number">08</span><span>{'}'};</span></p><p><span className="line-number">09</span>&nbsp;</p><p><span className="line-number">10</span><span className="syntax-comment">// The next commit is a new beginning.</span></p></div><div className="file-bottom"><span><span className="status-dot" /> LEARNING NEVER STOPS</span><span>UTF-8</span></div></div></div><div className="journey-heading reveal"><span className="command-label"><b>❯</b> git log --my-journey</span><span>A FEW MILESTONES ALONG THE WAY</span></div><div className="timeline">{milestones.map(item => <article className="timeline-item reveal" key={item.date}><span className="timeline-dot" /><span className="timeline-date">{item.date}</span><h3>{item.title}</h3><p>{item.detail}</p><a href={item.link} target="_blank" rel="noreferrer"><span>❯ {item.command}</span><Icon name="external" size={12} /></a></article>)}</div></section>
+      <section className="section container projects" id="projects"><div className="section-heading reveal"><div><p className="eyebrow"><span>02</span> / SELECTED WORK</p><h2>Less “what if”.<br />More <em>“here it is”.</em></h2></div><p className="section-copy">Real projects. Different challenges.<br />A little more learned with every build.</p></div><div className="project-controls"><span className="command-label"><b>❯</b> ls ./projects</span><div className="filters" role="group" aria-label="Filter projects by type">{['All builds', 'Web', 'Mobile', 'Games'].map(category => <button key={category} onClick={() => setFilter(category)} aria-pressed={filter === category}>{category}<span>{category === 'All builds' ? '03' : '01'}</span></button>)}</div></div><div className="project-grid" aria-live="polite">{visibleProjects.map(project => <article className={`project-card ${project.id === 'roadrescue' ? 'featured' : ''}`} key={project.id}><ProjectArt id={project.id} /><div className="project-info"><div className="project-meta"><span>/{project.number} — {project.category.toUpperCase()} DEVELOPMENT</span><span className="project-open-source"><Icon name="github" size={11} /> PUBLIC SOURCE</span></div><h3>{project.title}</h3><p className="project-subtitle">{project.subtitle}</p><p className="project-description">{project.description}</p><ul className="highlights">{project.highlights.map(item => <li key={item}><span>↗</span>{item}</li>)}</ul><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="project-links"><a href={project.repository} target="_blank" rel="noreferrer"><Icon name="github" size={15} /> Source code <Icon name="external" size={12} /><span className="sr-only"> for {project.title}</span></a>{project.demo && <a href={project.demo} target="_blank" rel="noreferrer" className="demo-link">Live demo <Icon name="external" size={13} /><span className="sr-only"> of {project.title}</span></a>}</div></div></article>)}</div><div className="repository-footer"><span><Icon name="code" size={16} /> More experiments. More small beginnings.</span><a href={`${githubUrl}?tab=repositories`} target="_blank" rel="noreferrer">All repositories <Icon name="arrow" size={15} /></a></div></section>
+      <section className="section container stack" id="stack"><div className="section-heading reveal"><div><p className="eyebrow"><span>03</span> / THE TOOLKIT</p><h2>Different tools.<br /><em>One builder’s mindset.</em></h2></div><p className="section-copy">Technologies I’ve put to work<br />in my public projects.</p></div><div className="stack-grid">{stack.map(group => <article className="stack-card reveal" key={group.title}><div className="stack-card-top"><span className="stack-icon"><Icon name={group.icon} size={21} /></span><span>{group.file}</span></div><h3>{group.title}</h3><div className="stack-items">{group.items.map(item => <span key={item}><i />{item}</span>)}</div><p>{group.note}</p></article>)}</div><div className="stack-footnote"><span><span className="status-dot" /> VERIFIED IN THE BUILD, NOT JUST ON THE LIST.</span><a href={githubUrl} target="_blank" rel="noreferrer">Explore the source <Icon name="external" size={11} /></a></div></section>
+      <section className="connect container" id="connect"><div className="connect-grid" aria-hidden="true" /><div className="reveal"><p className="eyebrow"><span>04</span> / KEEP IN TOUCH</p><h2>The next chapter<br />starts with <em>curiosity.</em></h2><p>Want to see what I’m building?<br />Follow the code, explore the projects, and come along for the journey.</p><a className="button" href={githubUrl} target="_blank" rel="noreferrer"><Icon name="github" size={17} /> Find me on GitHub <Icon name="arrow" size={17} /></a><a className="connect-handle" href={githubUrl} target="_blank" rel="noreferrer">@Sachith1227 <Icon name="external" size={12} /></a></div><div className="connect-art" aria-hidden="true"><span>{'{'}<span>✳</span>{'}'}</span><small>ALWAYS A WORK IN PROGRESS.</small></div></section>
+    </main><footer className="footer container"><a className="brand" href="#home" aria-label="Back to home"><span className="brand-mark">c<span>s</span><b>.</b></span></a><p>© {new Date().getFullYear()} CHAMALKA SENAVIRATHNA<span>Built with intention. Always evolving.</span></p><a className="footer-source" href={githubUrl} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> @Sachith1227</a><a className="back-top" href="#home">BACK TO TOP <span>↑</span></a></footer>
+  </div>
+}
