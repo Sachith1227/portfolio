@@ -191,8 +191,7 @@
   .portrait-stage > img {
     height: 90%;
   }
-  .portrait-watermark,
-  .portrait-cs-trace {
+  .portrait-watermark {
     font-size: 180px;
     letter-spacing: -20px;
   }
@@ -463,8 +462,7 @@
   .portrait-stage > img {
     height: 94%;
   }
-  .portrait-watermark,
-  .portrait-cs-trace {
+  .portrait-watermark {
     font-size: 205px;
   }
   .section {

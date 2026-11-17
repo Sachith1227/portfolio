@@ -53,30 +53,24 @@ export default function Hero() {
       <div className="portrait-wrap enter">
         <div className="portrait-stage">
           <div className="portrait-grid" />
-          <div className="portrait-ring" aria-hidden="true" />
-          <div className="portrait-ring ring-two" aria-hidden="true" />
+          <div className="portrait-ring" aria-hidden="true">
+            <span className="ring-spark" />
+            <span className="ring-spark ring-spark-quarter" />
+            <span className="ring-spark ring-spark-delayed" />
+            <span className="ring-spark ring-spark-three-quarter" />
+          </div>
+          <div className="portrait-ring ring-two" aria-hidden="true">
+            <span className="ring-spark ring-spark-reverse" />
+          </div>
           <span className="portrait-watermark" aria-hidden="true">
-            CS
-            <span className="watermark-glint">CS</span>
+            <span className="watermark-letter">C</span>
+            <span className="watermark-letter">S</span>
           </span>
           <img
             src="/chamalka-portrait.png"
             alt="Chamalka Senavirathna in a navy suit and white shirt"
             fetchPriority="high"
           />
-          <div className="portrait-tracers" aria-hidden="true">
-            <div className="tracer-track">
-              <span className="ring-spark" />
-              <span className="ring-spark ring-spark-third" />
-              <span className="ring-spark ring-spark-two-third" />
-            </div>
-            <div className="tracer-track tracer-track-inner">
-              <span className="ring-spark ring-spark-reverse" />
-            </div>
-            <span className="portrait-cs-trace">
-              CS<span className="cs-spark" />
-            </span>
-          </div>
         </div>
       </div>
     </section>

@@ -217,11 +217,11 @@ h1 > .hero-first-name {
   position: absolute;
   top: 12%;
   left: 0;
-  width: 15px;
+  width: 4px;
   height: 4px;
-  border-radius: 100% 40% 40% 100% / 50%;
-  background: linear-gradient(90deg, transparent, #ff4756 65%, #fff5f5);
-  box-shadow: 2px 0 7px #ff4959;
+  border-radius: 50%;
+  background: #fff5f5;
+  box-shadow: 0 0 6px 2px #ff4959, -6px 0 10px #ff273a;
   pointer-events: none;
   animation: name-spark 7s ease-in-out infinite;
 }
@@ -377,25 +377,6 @@ h1 > .hero-first-name {
   top: 27%;
   border-color: #70a5ff20;
 }
-.portrait-tracers {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  mask-image: radial-gradient(ellipse 17% 25% at 50% 30%, transparent 70%, #000 100%);
-}
-.tracer-track {
-  position: absolute;
-  width: 95%;
-  aspect-ratio: 1;
-  top: 17%;
-  left: 3%;
-}
-.tracer-track-inner {
-  width: 76%;
-  top: 27%;
-  left: 12.5%;
-}
 .ring-spark {
   position: absolute;
   inset: 0;
@@ -408,18 +389,17 @@ h1 > .hero-first-name {
   position: absolute;
   top: -3px;
   left: 50%;
-  width: 15px;
+  width: 5px;
   height: 5px;
-  border-radius: 100% 40% 40% 100% / 50%;
-  background: linear-gradient(90deg, transparent, #ff3546 65%, #fff1f2);
-  box-shadow: 2px 0 8px #ff3546;
+  border-radius: 50%;
+  background: #fff1f2;
+  box-shadow: 0 0 7px 2px #ff3546, 0 0 16px #ff3546;
 }
-.ring-spark-third { animation-delay: -4.667s; }
-.ring-spark-two-third { animation-delay: -9.333s; }
+.ring-spark-quarter { animation-delay: -3.5s; }
+.ring-spark-delayed { animation-delay: -7s; }
+.ring-spark-three-quarter { animation-delay: -10.5s; }
 .ring-spark-reverse { animation: spin 19s linear infinite reverse; }
-.ring-spark-reverse::before { transform: rotate(180deg); }
-.portrait-watermark,
-.portrait-cs-trace {
+.portrait-watermark {
   position: absolute;
   left: 8%;
   top: 2%;
@@ -428,38 +408,25 @@ h1 > .hero-first-name {
   font-weight: 800;
   letter-spacing: -25px;
   color: transparent;
-}
-.portrait-watermark {
   -webkit-text-stroke: 1px #c8ff8318;
   z-index: 0;
 }
-.watermark-glint {
-  position: absolute;
-  inset: 0;
-  color: transparent;
-  -webkit-text-stroke: 0;
-  background: linear-gradient(90deg, transparent 42%, #ff465570 49%, #ffb0b0a0 50%, #ff465570 51%, transparent 58%);
-  background-size: 300% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: name-glint 8s ease-in-out infinite;
+.watermark-letter {
+  display: inline-block;
+  animation: watermark-glow 5s ease-in-out infinite;
 }
-.portrait-cs-trace { -webkit-text-stroke: 0; }
-.cs-spark {
-  position: absolute;
-  width: 15px;
-  height: 5px;
-  border-radius: 100% 40% 40% 100% / 50%;
-  background: linear-gradient(90deg, transparent, #ff3546 65%, #fff1f2);
-  box-shadow: 2px 0 8px #ff3546;
-  animation: cs-spark-trace 8s linear infinite;
+.watermark-letter + .watermark-letter {
+  animation-delay: 0.8s;
 }
-@keyframes cs-spark-trace {
-  0%, 100% { left: 8%; top: 55%; transform: rotate(-90deg); }
-  20% { left: 20%; top: 12%; transform: rotate(0deg); }
-  40% { left: 73%; top: 12%; transform: rotate(0deg); }
-  60% { left: 88%; top: 48%; transform: rotate(90deg); }
-  80% { left: 70%; top: 85%; transform: rotate(180deg); }
+@keyframes watermark-glow {
+  0%, 100% {
+    -webkit-text-stroke-color: #ff3b4525;
+    text-shadow: none;
+  }
+  30%, 50% {
+    -webkit-text-stroke-color: #ff616c99;
+    text-shadow: 0 0 18px #ff354a55;
+  }
 }
 .portrait-stage > img {
   position: absolute;
@@ -1460,17 +1427,13 @@ h1.enter {
 }
 .motion-off .hero-letter-glint,
 .motion-off .hero-name-spark,
-.motion-off .ring-spark,
-.motion-off .watermark-glint,
-.motion-off .cs-spark {
+.motion-off .ring-spark {
   display: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-letter-glint,
   .hero-name-spark,
-  .ring-spark,
-  .watermark-glint,
-  .cs-spark {
+  .ring-spark {
     display: none;
   }
 }
