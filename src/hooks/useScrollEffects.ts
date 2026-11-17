@@ -7,19 +7,26 @@ export function useScrollEffects() {
     const root = rootRef.current
     if (!root) return
 
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          entry.target.classList.add('visible')
-          revealObserver.unobserve(entry.target)
-        })
-      },
-      { threshold: 0.1 },
-    )
-    root
-      .querySelectorAll('.reveal')
-      .forEach((element) => revealObserver.observe(element))
+    const revealTargets = root.querySelectorAll('.reveal, .work-card')
+    let revealObserver: IntersectionObserver | undefined
+    if ('IntersectionObserver' in window) {
+      root.classList.add('has-scroll-motion')
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return
+            entry.target.classList.add('visible', 'is-in-view')
+            revealObserver?.unobserve(entry.target)
+          })
+        },
+        { threshold: 0.1 },
+      )
+      revealTargets.forEach((element) => revealObserver?.observe(element))
+    } else {
+      revealTargets.forEach((element) =>
+        element.classList.add('visible', 'is-in-view'),
+      )
+    }
 
     let frame = 0
     const updateProgress = () => {
@@ -42,7 +49,8 @@ export function useScrollEffects() {
     updateProgress()
 
     return () => {
-      revealObserver.disconnect()
+      revealObserver?.disconnect()
+      root.classList.remove('has-scroll-motion')
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
       cancelAnimationFrame(frame)

@@ -1,21 +1,25 @@
-.rain-glass {
+.background .rain-glass {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  opacity: 0.64;
+  mask-image: linear-gradient(90deg, #0007, #000a 45%, #000);
 }
 
 .rain-drop {
   position: absolute;
-  border: 1px solid #ffe6e82e;
-  border-radius: 48% 52% 48% 52% / 40% 40% 60% 60%;
+  border: 1px solid #ffe9eb25;
+  border-radius: 48% 52% 48% 52% / 43% 43% 57% 57%;
   background:
-    radial-gradient(ellipse at 30% 22%, #fff9 0 8%, transparent 22%),
-    radial-gradient(ellipse at 50% 75%, #ffb8bf32, #ffffff0c 55%, #14080c22 85%);
+    radial-gradient(ellipse at 29% 21%, #fffb 0 5%, #fff4 12%, transparent 26%),
+    radial-gradient(ellipse at 70% 83%, #ffe6ea45, transparent 37%),
+    linear-gradient(145deg, #ffffff22, #a9b8c608 48%, #10050b60);
   box-shadow:
-    inset -1px -1px 2px #fff4,
-    0 1px 3px #0008;
-  opacity: 0.65;
+    inset 1px 1px 1px #fff3,
+    inset -1px -1px 2px #ffd1d444,
+    0 1px 2px #000a;
+  opacity: 0.72;
 }
 
 .rain-drop-sliding {
@@ -28,24 +32,33 @@
   left: 50%;
   bottom: 65%;
   width: 1px;
-  height: 35px;
-  background: linear-gradient(transparent, #ffe3e72b 55%, #fff9);
+  height: var(--trail-length, 40px);
+  background: linear-gradient(transparent, #f8dce01a 50%, #ffe7eb78);
   transform: translateX(-50%);
 }
 
 @keyframes rain-slide {
   0%,
-  12% {
+  8% {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(-12px) scale(0.9);
   }
-  22%,
-  75% {
+  18% {
+    opacity: 0.8;
+    transform: translateY(0) scale(1);
+  }
+  42%,
+  51% {
+    opacity: 0.8;
+    transform: translateY(24px) scale(1.05);
+  }
+  80% {
     opacity: 0.7;
+    transform: translateY(80px) scale(0.9, 1.2);
   }
   100% {
     opacity: 0;
-    transform: translateY(120px);
+    transform: translateY(135px) scale(0.85, 1.15);
   }
 }
 

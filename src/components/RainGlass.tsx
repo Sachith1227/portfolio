@@ -1,13 +1,23 @@
-const drops = Array.from({ length: 90 }, (_, index) => {
-  const size = 4 + ((index * 7) % 9)
+import type { CSSProperties } from 'react'
+
+// A stable distribution avoids a visible repeating pattern across the page.
+const random = (seed: number) => {
+  const value = Math.sin(seed * 127.1 + 311.7) * 43758.5453
+  return value - Math.floor(value)
+}
+
+const drops = Array.from({ length: 180 }, (_, index) => {
+  const size = 3 + Math.round(Math.pow(random(index * 4 + 2), 2) * 12)
+  const sliding = index % 10 === 0
   return {
-    left: `${1 + ((index * 37 + (index % 5) * 11) % 98)}%`,
-    top: `${2 + ((index * 47 + (index % 9) * 13) % 96)}%`,
+    left: `${1 + random(index * 4) * 98}%`,
+    top: `${1 + random(index * 4 + 1) * 96}%`,
     width: `${size}px`,
-    height: `${Math.round(size * 1.25)}px`,
-    animationDuration: `${8 + (index % 5) * 2}s`,
-    animationDelay: `${-(index % 11)}s`,
-    sliding: index % 6 === 0,
+    height: `${Math.round(size * (sliding ? 1.35 : 1.1))}px`,
+    animationDuration: `${10 + Math.round(random(index * 4 + 3) * 9)}s`,
+    animationDelay: `${-Math.round(random(index * 4 + 4) * 15)}s`,
+    '--trail-length': `${24 + Math.round(random(index * 4 + 5) * 48)}px`,
+    sliding,
   }
 })
 
@@ -18,7 +28,7 @@ export default function RainGlass() {
         <span
           key={index}
           className={`rain-drop${sliding ? ' rain-drop-sliding' : ''}`}
-          style={style}
+          style={style as CSSProperties}
         />
       ))}
     </div>
