@@ -55,16 +55,16 @@ export default function Hero() {
           <div className="portrait-grid" />
           <div className="portrait-ring" aria-hidden="true">
             <span className="ring-spark" />
-            <span className="ring-spark ring-spark-quarter" />
             <span className="ring-spark ring-spark-delayed" />
-            <span className="ring-spark ring-spark-three-quarter" />
           </div>
           <div className="portrait-ring ring-two" aria-hidden="true">
             <span className="ring-spark ring-spark-reverse" />
           </div>
           <span className="portrait-watermark" aria-hidden="true">
-            <span className="watermark-letter">C</span>
-            <span className="watermark-letter">S</span>
+            CS
+            <span className="watermark-water">CS</span>
+            <span className="watermark-bubble" />
+            <span className="watermark-bubble watermark-bubble-two" />
           </span>
           <img
             src="/chamalka-portrait.png"
