@@ -1,0 +1,112 @@
+.portrait-code {
+  position: absolute;
+  inset: 5% 1% 4%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(transparent, #000 15%, #000 80%, transparent);
+}
+
+.portrait-code-column {
+  position: absolute;
+  top: 17%;
+  width: 48%;
+  overflow: hidden;
+  color: #ff8d95;
+  font: 9px/2.15 var(--mono);
+  white-space: nowrap;
+  opacity: 0.52;
+}
+.portrait-code-left {
+  left: 1%;
+}
+.portrait-code-right {
+  right: 0;
+  top: 28%;
+  text-align: right;
+}
+.portrait-code-right .portrait-code-label {
+  justify-content: flex-end;
+}
+.portrait-code-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 14px;
+  color: #ff6875;
+  font-size: 7px;
+  letter-spacing: 0.16em;
+}
+.portrait-code-label > span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ff5362;
+  box-shadow: 0 0 8px #ff5362;
+}
+.portrait-code-stream {
+  display: flex;
+  flex-direction: column;
+  animation: portrait-code-drift 9s ease-in-out infinite alternate;
+}
+.portrait-code-right .portrait-code-stream {
+  align-items: flex-end;
+  animation-duration: 11s;
+  animation-direction: alternate-reverse;
+}
+.portrait-code-stream span {
+  display: block;
+}
+.portrait-code-stream i {
+  display: inline-block;
+  margin-right: 8px;
+  color: #ff5665;
+  font-style: normal;
+  opacity: 0.6;
+}
+.portrait-code-scan {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 35%;
+  background: linear-gradient(transparent 88%, #ff455b30 99%, transparent);
+  animation: portrait-code-scan 8s linear infinite;
+}
+@keyframes portrait-code-drift {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(-12px);
+  }
+}
+@keyframes portrait-code-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(320%);
+  }
+}
+@media (max-width: 600px) {
+  .portrait-code-column {
+    font-size: 8px;
+    opacity: 0.48;
+  }
+  .portrait-code-label {
+    font-size: 6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-code-stream {
+    animation: none;
+  }
+  .portrait-code-scan {
+    display: none;
+  }
+}
+.motion-off .portrait-code-stream {
+  animation: none;
+}
+.motion-off .portrait-code-scan {
+  display: none;
+}

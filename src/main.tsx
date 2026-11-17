@@ -8,6 +8,7 @@ import './styles/rain.css'
 import './styles/intro.css'
 import './styles/sections.css'
 import './styles/redesign.css'
+import './styles/portrait-code.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
