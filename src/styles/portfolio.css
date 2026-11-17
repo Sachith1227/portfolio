@@ -189,6 +189,56 @@ h1 > span {
   letter-spacing: -3.6px;
   padding-top: 2px;
 }
+.hero-name-line {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+}
+h1 > .hero-first-name {
+  color: inherit;
+  font-size: 1em;
+  letter-spacing: inherit;
+  padding-top: 0;
+}
+.hero-letter-glint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  background: linear-gradient(90deg, transparent 42%, #ff6771 48%, #fff 50%, #ff6771 52%, transparent 58%);
+  background-size: 300% 100%;
+  background-position: 150% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: name-glint 7s ease-in-out infinite;
+}
+.hero-name-spark {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff5f5;
+  box-shadow: 0 0 6px 2px #ff4959, -6px 0 10px #ff273a;
+  pointer-events: none;
+  animation: name-spark 7s ease-in-out infinite;
+}
+.hero-last-name .hero-letter-glint,
+.hero-last-name .hero-name-spark {
+  animation-delay: -3.5s;
+}
+.hero-last-name .hero-name-spark { top: auto; bottom: 10%; }
+@keyframes name-glint {
+  0%, 10% { background-position: 150% 0; }
+  60%, 100% { background-position: -50% 0; }
+}
+@keyframes name-spark {
+  0%, 10% { left: 0; opacity: 0; }
+  18%, 52% { opacity: 0.9; }
+  60%, 100% { left: 100%; opacity: 0; }
+}
 .role-line {
   display: flex;
   align-items: center;
@@ -327,6 +377,28 @@ h1 > span {
   top: 27%;
   border-color: #70a5ff20;
 }
+.ring-spark {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: spin 14s linear infinite;
+}
+.ring-spark::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff1f2;
+  box-shadow: 0 0 7px 2px #ff3546, 0 0 16px #ff3546;
+}
+.ring-spark-quarter { animation-delay: -3.5s; }
+.ring-spark-delayed { animation-delay: -7s; }
+.ring-spark-three-quarter { animation-delay: -10.5s; }
+.ring-spark-reverse { animation: spin 19s linear infinite reverse; }
 .portrait-watermark {
   position: absolute;
   left: 8%;
@@ -1335,4 +1407,16 @@ h1.enter {
 .motion-off .reveal {
   opacity: 1;
   transform: none;
+}
+.motion-off .hero-letter-glint,
+.motion-off .hero-name-spark,
+.motion-off .ring-spark {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter-glint,
+  .hero-name-spark,
+  .ring-spark {
+    display: none;
+  }
 }
