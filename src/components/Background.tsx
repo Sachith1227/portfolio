@@ -1,3 +1,5 @@
+import RainGlass from './RainGlass'
+
 export default function Background() {
   return (
     <div className="background" aria-hidden="true">
@@ -43,6 +45,7 @@ export default function Background() {
           />
         </g>
       </svg>
+      <RainGlass />
     </div>
   )
 }

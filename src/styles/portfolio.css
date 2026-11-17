@@ -6,6 +6,7 @@
   --panel: #101624;
   --mono: 'DM Mono', monospace;
   position: relative;
+  min-height: 100vh;
   isolation: isolate;
   overflow: clip;
 }
@@ -28,6 +29,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 1100px;
+  min-height: 100%;
   overflow: hidden;
   z-index: -1;
   pointer-events: none;
@@ -433,46 +435,6 @@ h1 > .hero-first-name {
   color: transparent;
   -webkit-text-stroke: 1px #c8ff8318;
   z-index: 0;
-}
-.watermark-water {
-  position: absolute;
-  inset: 0;
-  opacity: .3;
-  color: transparent;
-  -webkit-text-stroke: 0;
-  background: linear-gradient(0deg, #ff425e55 0%, #ff869755 44%, transparent 48%);
-  background-size: 100% 180%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: watermark-water 6s ease-in-out infinite alternate;
-}
-.watermark-bubble {
-  position: absolute;
-  left: 12%;
-  bottom: 5%;
-  width: 10px;
-  height: 10px;
-  border: 1px solid #ffd3d995;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 25%, #fff9 0 9%, transparent 25%), radial-gradient(circle at 50% 75%, #ff465655, transparent 70%);
-  box-shadow: inset 0 0 4px #ff7b9180, 0 0 5px #ff354530;
-  animation: watermark-bubble-rise 5s ease-in-out infinite;
-}
-.watermark-bubble-two {
-  left: 36%;
-  width: 7px;
-  height: 7px;
-  animation-delay: -2.5s;
-}
-@keyframes watermark-water {
-  from { background-position: 0 100%; }
-  to { background-position: 0 20%; }
-}
-@keyframes watermark-bubble-rise {
-  0% { opacity: 0; transform: translate(0, 0) scale(.7); }
-  15%, 75% { opacity: .85; }
-  50% { transform: translate(8px, -50px) scale(1); }
-  100% { opacity: 0; transform: translate(-2px, -100px) scale(1.1); }
 }
 .portrait-stage > img {
   position: absolute;
@@ -1473,17 +1435,13 @@ h1.enter {
 }
 .motion-off .hero-letter-glint,
 .motion-off .hero-name-spark,
-.motion-off .ring-spark,
-.motion-off .watermark-water,
-.motion-off .watermark-bubble {
+.motion-off .ring-spark {
   display: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-letter-glint,
   .hero-name-spark,
-  .ring-spark,
-  .watermark-water,
-  .watermark-bubble {
+  .ring-spark {
     display: none;
   }
 }

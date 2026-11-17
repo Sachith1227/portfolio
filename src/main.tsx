@@ -4,6 +4,7 @@ import './styles/global.css'
 import './styles/portfolio.css'
 import './styles/responsive.css'
 import './styles/theme.css'
+import './styles/rain.css'
 import './styles/intro.css'
 import App from './App.tsx'
 

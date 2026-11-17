@@ -62,9 +62,6 @@ export default function Hero() {
           </div>
           <span className="portrait-watermark" aria-hidden="true">
             CS
-            <span className="watermark-water">CS</span>
-            <span className="watermark-bubble" />
-            <span className="watermark-bubble watermark-bubble-two" />
           </span>
           <img
             src="/chamalka-portrait.png"
