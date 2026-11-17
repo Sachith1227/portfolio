@@ -1,82 +1,43 @@
 import type { Project } from '../data/portfolio'
 import Icon from './Icon'
 
-function ProjectArt({ id }: { id: string }) {
+function ProjectArt({ id, title }: { id: string; title: string }) {
   if (id === 'roadrescue')
     return (
-      <div className="project-art road-art">
-        <div className="browser-frame">
-          <div className="browser-bar">
-            <span className="window-dots" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-            </span>
-            <span>roadrescue / live website</span>
-            <Icon name="external" size={11} />
-          </div>
-          <img
-            src="/projects/roadrescue.png"
-            alt="Screenshot of the live RoadRescue homepage showing roadside assistance and request tracking"
-            loading="lazy"
-          />
+      <div className="work-image work-image-web">
+        <div className="work-browser">
+          <span />
+          <span />
+          <span />
+          <small>ROADRESCUE</small>
         </div>
-        <span className="art-caption">REACT + TYPESCRIPT / FULL-STACK WEB</span>
+        <img
+          src="/projects/roadrescue-screenshot.png"
+          alt="RoadRescue project screenshot"
+          loading="lazy"
+        />
       </div>
     )
-  if (id === 'spendsmart')
+  if (id === 'volleyball')
     return (
-      <div className="project-art spend-art">
-        <span className="art-grid" />
-        <div className="spend-orbit" />
-        <div className="spend-orbit orbit-two" />
-        <div className="spend-brand">
-          <img
-            src="/projects/spendsmart-logo.png"
-            alt="SpendSmart app icon from the project repository"
-            loading="lazy"
-          />
-          <span>
-            SpendSmart<span>Every little bit adds up.</span>
-          </span>
-        </div>
-        <span className="float-tag tag-budget">
-          ↗ &nbsp; Budget with purpose
-        </span>
-        <span className="float-tag tag-cloud">
-          <span className="status-dot" /> Cloud-synced
-        </span>
-        <span className="art-caption">FLUTTER + FIREBASE / MOBILE APP</span>
+      <div className="work-image work-image-game">
+        <img
+          src="/projects/volleyball-screenshot.png"
+          alt="Beach Volleyball Mini game screenshot"
+          loading="lazy"
+        />
       </div>
     )
   return (
-    <div className="project-art game-art">
-      <img
-        className="court"
-        src="/projects/volleyball-court.jpg"
-        alt="Beach court artwork from Beach Volleyball Mini"
-        loading="lazy"
-      />
-      <span className="game-title">
-        BEACH
-        <br />
-        <strong>VOLLEYBALL</strong>
-        <span>MINI</span>
-      </span>
-      <div className="net" />
-      <img
-        className="game-player"
-        src="/projects/volleyball-player.png"
-        alt=""
-        loading="lazy"
-      />
-      <img
-        className="game-ball"
-        src="/projects/volleyball-ball.png"
-        alt=""
-        loading="lazy"
-      />
-      <span className="art-caption">PYTHON + PYGAME / GAME ARTWORK</span>
+    <div className="work-image work-image-app">
+      <div className="work-app-icon">
+        <img src="/projects/spendsmart-logo.png" alt="" loading="lazy" />
+      </div>
+      <div>
+        <span>MOBILE APP</span>
+        <strong>{title}</strong>
+        <small>Personal finance, made simpler.</small>
+      </div>
     </div>
   )
 }
@@ -84,49 +45,41 @@ function ProjectArt({ id }: { id: string }) {
 export default function ProjectCard({ project }: { project: Project }) {
   return (
     <article
-      className={`project-card ${project.id === 'roadrescue' ? 'featured' : ''}`}
+      className={`work-card${project.id === 'roadrescue' ? ' work-card-featured' : ''}`}
     >
-      <ProjectArt id={project.id} />
-      <div className="project-info">
-        <div className="project-meta">
+      <ProjectArt id={project.id} title={project.title} />
+      <div className="work-info">
+        <div className="work-meta">
           <span>
-            /{project.number} — {project.category.toUpperCase()} DEVELOPMENT
+            {project.category.toUpperCase()} / {project.number}
           </span>
-          <span className="project-open-source">
-            <Icon name="github" size={11} /> PUBLIC SOURCE
-          </span>
+          <span>PROJECT</span>
         </div>
         <h3>{project.title}</h3>
-        <p className="project-subtitle">{project.subtitle}</p>
-        <p className="project-description">{project.description}</p>
-        <ul className="highlights">
-          {project.highlights.map((item) => (
-            <li key={item}>
-              <span>↗</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <div className="tags">
+        <p>{project.description}</p>
+        <div className="work-tags" aria-label="Technologies used">
           {project.tags.map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
         </div>
-        <div className="project-links">
-          <a href={project.repository} target="_blank" rel="noreferrer">
-            <Icon name="github" size={15} /> Source code{' '}
+        <div className="work-links">
+          <a
+            href={project.repository}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`View ${project.title} source code on GitHub`}
+          >
+            <Icon name="github" size={16} /> Source code{' '}
             <Icon name="external" size={12} />
-            <span className="sr-only"> for {project.title}</span>
           </a>
           {project.demo && (
             <a
               href={project.demo}
               target="_blank"
               rel="noreferrer"
-              className="demo-link"
+              aria-label={`View ${project.title} live demo`}
             >
-              Live demo <Icon name="external" size={13} />
-              <span className="sr-only"> of {project.title}</span>
+              Live demo <Icon name="arrow" size={15} />
             </a>
           )}
         </div>

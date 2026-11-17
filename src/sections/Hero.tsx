@@ -5,6 +5,7 @@ export default function Hero() {
   return (
     <section className="hero container" id="home" aria-labelledby="hero-title">
       <div className="hero-copy">
+        <p className="hero-kicker enter"><span /> DESIGN. DEVELOP. BUILD.</p>
         <p className="hero-greeting enter">Hi, I’m</p>
         <h1 className="enter" id="hero-title">
           <span className="hero-name-line hero-first-name">
@@ -29,16 +30,14 @@ export default function Hero() {
           </span>
         </div>
         <p className="hero-description enter">
-          I build web platforms, mobile apps, and games.
+          I build thoughtful web platforms, mobile apps, and games — turning ideas into useful digital experiences.
         </p>
         <div className="hero-actions enter">
           <a
             className="button"
-            href={`${githubUrl}?tab=repositories`}
-            target="_blank"
-            rel="noreferrer"
+            href="#projects"
           >
-            View projects <Icon name="arrow" size={16} />
+            Explore my work <Icon name="arrow" size={16} />
           </a>
           <a
             className="button button-outline"

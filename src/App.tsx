@@ -2,9 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 import Background from './components/Background'
 import Header from './components/Header'
 import Intro from './components/Intro'
+import Footer from './components/Footer'
 import { useMotionPreference } from './hooks/useMotionPreference'
 import { useScrollEffects } from './hooks/useScrollEffects'
 import Hero from './sections/Hero'
+import Projects from './sections/Projects'
+import About from './sections/About'
+import Stack from './sections/Stack'
+import Connect from './sections/Connect'
 
 export default function App() {
   const { rootRef } = useScrollEffects()
@@ -45,7 +50,12 @@ export default function App() {
         <Header paused={paused} toggleMotion={toggleMotion} />
         <main id="main">
           <Hero />
+          <Projects />
+          <About />
+          <Stack />
+          <Connect />
         </main>
+        <Footer />
       </div>
     </div>
   )

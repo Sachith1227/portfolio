@@ -3,36 +3,41 @@ import Icon from '../components/Icon'
 
 export default function Connect() {
   return (
-    <section className="connect container" id="connect">
-      <div className="connect-grid" aria-hidden="true" />
-      <div className="reveal">
-        <p className="eyebrow">
-          <span>03</span> / KEEP IN TOUCH
-        </p>
-        <h2>
-          LET'S <em>CONNECT.</em>
-        </h2>
-        <p>Explore my latest work on GitHub.</p>
-        <a className="button" href={githubUrl} target="_blank" rel="noreferrer">
-          <Icon name="github" size={17} /> Find me on GitHub{' '}
-          <Icon name="arrow" size={17} />
-        </a>
-        <a
-          className="connect-handle"
-          href={githubUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          @Sachith1227 <Icon name="external" size={12} />
-        </a>
-      </div>
-      <div className="connect-art" aria-hidden="true">
-        <span>
-          {'{'}
-          <span>✳</span>
-          {'}'}
-        </span>
-        <small>ALWAYS A WORK IN PROGRESS.</small>
+    <section
+      className="portfolio-section container contact-section"
+      id="connect"
+      aria-labelledby="connect-title"
+    >
+      <div className="contact-panel reveal">
+        <div>
+          <p className="portfolio-kicker">
+            <span>04</span> / LET’S CONNECT
+          </p>
+          <h2 id="connect-title">
+            Have an idea?
+            <br />
+            <em>Let’s build something.</em>
+          </h2>
+          <p>
+            Take a look at what I’m working on and connect with me on GitHub.
+          </p>
+          <a
+            className="contact-button"
+            href={githubUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon name="github" size={18} /> Visit my GitHub{' '}
+            <Icon name="arrow" size={16} />
+          </a>
+        </div>
+        <div className="contact-decoration" aria-hidden="true">
+          <span>LET’S</span>
+          <strong>
+            CREATE<span>.</span>
+          </strong>
+          <small>IDEAS / CODE / CREATION</small>
+        </div>
       </div>
     </section>
   )

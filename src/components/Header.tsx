@@ -12,6 +12,12 @@ export default function Header({ paused, toggleMotion }: HeaderProps) {
     <header className="header">
       <div className="header-inner">
         <Brand showCaption />
+        <nav className="header-nav" aria-label="Main navigation">
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#stack">Skills</a>
+          <a href="#connect">Contact</a>
+        </nav>
         <div className="header-actions">
           <button
             className="motion-button"
