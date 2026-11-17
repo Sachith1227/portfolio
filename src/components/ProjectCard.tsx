@@ -28,6 +28,20 @@ function ProjectArt({ id, title }: { id: string; title: string }) {
         />
       </div>
     )
+  if (id === 'smartlog' || id === 'doctor-appointment')
+    return (
+      <div className={`work-image work-image-concept work-image-${id}`}>
+        <div className="work-concept-icon" aria-hidden="true">
+          <Icon name={id === 'smartlog' ? 'layers' : 'phone'} size={30} />
+        </div>
+        <div className="work-concept-copy">
+          <span>
+            {id === 'smartlog' ? 'FINAL-YEAR GROUP PROJECT' : 'HEALTHCARE APP'}
+          </span>
+          <strong>{title}</strong>
+        </div>
+      </div>
+    )
   return (
     <div className="work-image work-image-app">
       <div className="work-app-icon">
@@ -53,7 +67,9 @@ export default function ProjectCard({ project }: { project: Project }) {
           <span>
             {project.category.toUpperCase()} / {project.number}
           </span>
-          <span>PROJECT</span>
+          <span>
+            {project.id === 'smartlog' ? 'GROUP CONTRIBUTOR' : 'PROJECT'}
+          </span>
         </div>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
@@ -63,15 +79,24 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
         <div className="work-links">
-          <a
-            href={project.repository}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`View ${project.title} source code on GitHub`}
-          >
-            <Icon name="github" size={16} /> Source code{' '}
-            <Icon name="external" size={12} />
-          </a>
+          {project.repository && (
+            <a
+              href={project.repository}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={
+                project.id === 'doctor-appointment'
+                  ? "Visit Chamalka's GitHub profile"
+                  : `View ${project.title} source code on GitHub`
+              }
+            >
+              <Icon name="github" size={16} />{' '}
+              {project.id === 'doctor-appointment'
+                ? 'View GitHub profile'
+                : 'Source code'}{' '}
+              <Icon name="external" size={12} />
+            </a>
+          )}
           {project.demo && (
             <a
               href={project.demo}

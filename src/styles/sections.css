@@ -131,6 +131,41 @@
   background:
     radial-gradient(ellipse at 50% 50%, #68303e66, transparent 65%), #17101a;
 }
+.work-image-concept {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+  background:
+    radial-gradient(ellipse at 50% 50%, #6c20344d, transparent 65%), #17101a;
+}
+.work-concept-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  border: 1px solid #ff68784d;
+  border-radius: 17px;
+  background: #ff53650d;
+  color: #ff7884;
+}
+.work-concept-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.work-concept-copy span {
+  color: #ff7884;
+  font: 9px/1.4 var(--mono);
+  letter-spacing: 0.1em;
+}
+.work-concept-copy strong {
+  color: #f7eef1;
+  font-size: clamp(18px, 2vw, 25px);
+  letter-spacing: -0.04em;
+}
 .work-app-icon {
   width: 72px;
   height: 72px;
