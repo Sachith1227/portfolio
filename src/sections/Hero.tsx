@@ -128,7 +128,7 @@ export default function Hero() {
             CS
           </span>
           <img
-            src="/chamalka-portrait.png"
+            src={`${import.meta.env.BASE_URL}chamalka-portrait.png`}
             alt="Chamalka Senavirathna in a navy suit and white shirt"
             fetchPriority="high"
           />

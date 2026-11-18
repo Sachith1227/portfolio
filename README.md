@@ -78,6 +78,9 @@ The name and portrait come from the user. No employer, degree, client count, pro
 
 Visual inspiration: https://shsiam.com/ (terminal windows, code details, and developer-focused content). The layout, copy, and components are original to this portfolio.
 
-## Local operation
+## Deploy to GitHub Pages
 
-Run and preview locally. The existing `.openai/hosting.json` preserves the previously created Site identity; these changes have not been published.
+In the repository's **Settings → Pages**, set **Source** to **GitHub Actions**.
+The [deployment workflow](.github/workflows/deploy.yml) builds and publishes the website on pushes to `main`. If you enable Pages after pushing, open **Actions → Deploy portfolio to GitHub Pages** and select **Run workflow** on `main`.
+
+The default site URL is <https://sachith1227.github.io/portfolio/>.

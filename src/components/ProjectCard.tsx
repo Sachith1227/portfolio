@@ -12,7 +12,7 @@ function ProjectArt({ id, title }: { id: string; title: string }) {
           <small>ROADRESCUE</small>
         </div>
         <img
-          src="/projects/roadrescue-screenshot.png"
+          src={`${import.meta.env.BASE_URL}projects/roadrescue-screenshot.png`}
           alt="RoadRescue project screenshot"
           loading="lazy"
         />
@@ -22,7 +22,7 @@ function ProjectArt({ id, title }: { id: string; title: string }) {
     return (
       <div className="work-image work-image-game">
         <img
-          src="/projects/volleyball-screenshot.png"
+          src={`${import.meta.env.BASE_URL}projects/volleyball-screenshot.png`}
           alt="Beach Volleyball Mini game screenshot"
           loading="lazy"
         />
@@ -45,7 +45,11 @@ function ProjectArt({ id, title }: { id: string; title: string }) {
   return (
     <div className="work-image work-image-app">
       <div className="work-app-icon">
-        <img src="/projects/spendsmart-logo.png" alt="" loading="lazy" />
+        <img
+          src={`${import.meta.env.BASE_URL}projects/spendsmart-logo.png`}
+          alt=""
+          loading="lazy"
+        />
       </div>
       <div>
         <span>MOBILE APP</span>

@@ -72,7 +72,11 @@ export default function Intro({ onFinish }: IntroProps) {
           <div className="intro-orbit intro-orbit-outer" />
           <div className="intro-orbit intro-orbit-inner" />
           <div className="intro-logo-glow" />
-          <img className="intro-logo" src="/logo.png" alt="" />
+          <img
+            className="intro-logo"
+            src={`${import.meta.env.BASE_URL}logo.png`}
+            alt=""
+          />
         </div>
         <div className="intro-wordmark" aria-label="CHAMALKA">
           {'CHAMALKA'.split('').map((letter, index) => (
